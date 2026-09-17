@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>TPT Labels — Batch QR &amp; Barcode Generator</title>
+<meta name="description" content="Batch-generate QR, DataMatrix, Code128, Code39, EAN-13 and UPC-A labels offline, right in your browser. No account, no upload, no subscription." />
+<meta name="theme-color" content="#0f1115" />
+<link rel="manifest" href="manifest.json" />
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="icons/icon.svg" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="app-header">
+  <div class="brand">
+    <img src="icons/icon.svg" alt="" />
+    <span>TPT Labels</span>
+    <span class="brand-tag">by <a href="https://tptsolutions.co.nz" target="_blank" rel="noopener">TPT Solutions</a></span>
+  </div>
+  <nav>
+    <a href="#" id="install-link" hidden>Install app</a>
+    <a href="#" id="about-link">About &amp; privacy</a>
+    <a href="https://tptsolutions.co.nz" target="_blank" rel="noopener">tptsolutions.co.nz</a>
+  </nav>
+</header>
+
+<main>
+  <section class="panel" aria-label="Label input">
+    <h2>1. Codes</h2>
+
+    <label for="format">Symbology</label>
+    <select id="format">
+      <option value="qr" selected>QR Code</option>
+      <option value="datamatrix">Data Matrix</option>
+      <option value="code128">Code 128</option>
+      <option value="code39">Code 39</option>
+      <option value="ean13">EAN-13</option>
+      <option value="upca">UPC-A</option>
+    </select>
+
+    <div class="row" id="qr-ec-row">
+      <div>
+        <label for="ec-level">Error correction (QR only)</label>
+        <select id="ec-level">
+          <option value="L">L — 7%</option>
+          <option value="M" selected>M — 15%</option>
+          <option value="Q">Q — 25%</option>
+          <option value="H">H — 30%</option>
+        </select>
+      </div>
+    </div>
+
+    <label for="data">Data — one entry per line, or paste CSV (first column used)</label>
+    <textarea id="data" placeholder="https://example.com/p/1&#10;https://example.com/p/2&#10;SKU-00123&#10;SKU-00124"></textarea>
+
+    <label><input type="checkbox" id="show-caption" checked style="width:auto;display:inline-block;margin-right:6px;" /> Show text caption under each code</label>
+
+    <div class="btn-row">
+      <button class="primary" id="generate-btn" type="button">Generate</button>
+      <button class="secondary" id="load-sample-btn" type="button">Load sample data</button>
+    </div>
+
+    <div class="error-box" id="error-box"></div>
+  </section>
+
+  <section class="panel print-panel" aria-label="Label sheet preview">
+    <h2>2. Sheet layout &amp; export</h2>
+    <div class="sheet-controls">
+      <div>
+        <label for="cols">Columns</label>
+        <input type="number" id="cols" min="1" max="12" value="3" />
+      </div>
+      <div>
+        <label for="module-size">Module size (px)</label>
+        <input type="number" id="module-size" min="1" max="20" value="4" />
+      </div>
+      <div>
+        <label for="bar-height">Barcode height (px, 1D only)</label>
+        <input type="number" id="bar-height" min="20" max="300" value="80" />
+      </div>
+      <div>
+        <label for="cell-size">Cell size (mm, print only)</label>
+        <input type="number" id="cell-size" min="10" max="150" value="40" />
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="secondary" id="print-btn" type="button">Print / Save as PDF</button>
+      <button class="secondary" id="export-zip-btn" type="button">Export ZIP (SVG)</button>
+      <button class="secondary" id="export-zip-png-btn" type="button">Export ZIP (PNG)</button>
+    </div>
+
+    <hr style="border-color: var(--border); margin: 16px 0;" />
+
+    <div class="preview-toolbar">
+      <h2 style="margin:0;">Preview</h2>
+      <span class="count-pill" id="count-pill">0 codes</span>
+    </div>
+    <div id="sheet"></div>
+  </section>
+</main>
+
+<footer class="app-footer">
+  TPT Labels is a product of <a href="https://tptsolutions.co.nz" target="_blank" rel="noopener">TPT Solutions</a> —
+  runs entirely in your browser, works offline once loaded, nothing you type ever leaves your device.
+  <br />
+  More tools at <a href="https://tptsolutions.co.nz" target="_blank" rel="noopener">tptsolutions.co.nz</a>.
+</footer>
+
+<dialog id="about-dialog">
+  <h3>About TPT Labels</h3>
+  <p>TPT Labels is a batch QR / DataMatrix / Code128 / Code39 / EAN-13 / UPC-A generator built by
+     <a href="https://tptsolutions.co.nz" target="_blank" rel="noopener">TPT Solutions</a>.</p>
+  <p><strong>Privacy:</strong> everything runs locally in your browser via WebAssembly. Your data is never
+     uploaded, and once the app has loaded once it keeps working with no internet connection at all.</p>
+  <p>Questions or feedback: visit <a href="https://tptsolutions.co.nz" target="_blank" rel="noopener">tptsolutions.co.nz</a>.</p>
+  <div class="close-row"><button class="primary" id="about-close" type="button">Close</button></div>
+</dialog>
+
+<script type="module" src="main.js"></script>
+</body>
+</html>
