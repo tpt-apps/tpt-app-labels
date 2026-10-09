@@ -1,10 +1,9 @@
 # TPT Labels
 
 Batch QR / Data Matrix / Code 128 / Code 39 / EAN-13 / UPC-A label generator.
-Ships as a Windows desktop installer (Mac/Linux via Tauri too, once built on
-those platforms), with a self-hostable web bundle included for phone/tablet
-use. Built on the [`tpt-barcode`](https://github.com/tpt-solutions/tpt-barcode)
-engine.
+Ships as a Windows / Mac / Linux desktop installer, with a self-hostable web
+bundle included for phone/tablet use. Built on the
+[`tpt-barcode`](https://github.com/tpt-solutions/tpt-barcode) engine.
 
 See [GUMROAD.md](GUMROAD.md) for the product listing copy,
 [PRIVACY.md](PRIVACY.md) for the privacy statement shipped in-app, and
